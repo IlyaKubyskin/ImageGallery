@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="toolbar_height">64dp</dimen>
+    <dimen name="image_height">120dp</dimen>
+    <dimen name="small_progress_size">25dp</dimen>
+    <dimen name="large_progress_size">50dp</dimen>
+</resources>

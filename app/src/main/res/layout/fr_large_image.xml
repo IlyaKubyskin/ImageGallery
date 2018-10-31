@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/frameLargeImage"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".ui.largeimage.LargeImagePager">
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="@dimen/large_progress_size"
+        android:layout_height="@dimen/large_progress_size"
+        android:layout_gravity="center"
+        android:visibility="visible" />
+
+
+
+    <com.jsibbold.zoomage.ZoomageView
+            android:id="@+id/largeImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:zoomage_restrictBounds="false"
+            app:zoomage_autoResetMode="UNDER"
+            app:zoomage_autoCenter="true"
+            app:zoomage_zoomable="true"
+            app:zoomage_translatable="false"
+            app:zoomage_minScale="0.6"
+            app:zoomage_maxScale="8"/>
+
+</FrameLayout>
