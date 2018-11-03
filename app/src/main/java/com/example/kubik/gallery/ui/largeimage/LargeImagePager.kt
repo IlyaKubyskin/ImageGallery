@@ -4,16 +4,12 @@ import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v4.view.ViewPager
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.kubik.gallery.R
 import com.example.kubik.gallery.data.Repository
 import com.example.kubik.gallery.data.local.room.SavedHit
-import com.example.kubik.gallery.ui.MainActivity
 import com.example.kubik.gallery.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fr_pager_large_image.*
 
