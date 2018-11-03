@@ -1,15 +1,13 @@
 package com.example.kubik.gallery.ui.pictureslist.adapter
 
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import com.example.kubik.gallery.R
 import com.example.kubik.gallery.ui.pictureslist.adapter.holder.PictureHolder
 
-class PicturesListAdapter(private val callback: AdapterCallback) : RecyclerView.Adapter<PictureHolder>() {
+class PicturesListAdapter(private val callback: OnItemClickCallback) : RecyclerView.Adapter<PictureHolder>() {
 
     private val picturesList = mutableListOf<PictureItem>()
 
@@ -35,9 +33,11 @@ class PicturesListAdapter(private val callback: AdapterCallback) : RecyclerView.
         return position
     }
 
-    interface AdapterCallback {
+    interface OnItemClickCallback {
         fun onImageClick(itemView: View, adapterPosition: Int)
     }
 
-    interface PictureItem
+    interface PictureItem {
+        fun getPreviewUrl(): String
+    }
 }

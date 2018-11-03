@@ -7,9 +7,4 @@ import com.example.kubik.gallery.ui.pictureslist.PicturesListFragment
 class MainActivity : SingleFragmentActivity() {
 
     override fun createFragment(): Fragment = PicturesListFragment.newInstance()
-
-    companion object {
-        @JvmStatic
-        var position = 0
-    }
 }

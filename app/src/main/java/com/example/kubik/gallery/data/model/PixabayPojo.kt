@@ -12,4 +12,6 @@ data class Hit(
     var imageURL: String,
     var largeImageURL: String,
     var fullHDImageURL: String
-) : PicturesListAdapter.PictureItem
+) : PicturesListAdapter.PictureItem {
+    override fun getPreviewUrl() = previewURL
+}

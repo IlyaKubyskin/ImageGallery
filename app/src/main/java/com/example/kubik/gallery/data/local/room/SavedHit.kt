@@ -5,10 +5,12 @@ import android.arch.persistence.room.PrimaryKey
 import com.example.kubik.gallery.ui.pictureslist.adapter.PicturesListAdapter
 
 @Entity
-class SavedHit : PicturesListAdapter.PictureItem {
+data class SavedHit(
+    var previewURL: String,
+    var largeImageURL: String
+) : PicturesListAdapter.PictureItem {
+    override fun getPreviewUrl() = previewURL
+
     @PrimaryKey(autoGenerate = true)
     var id: Long? = null
-    var previewURL: String = ""
-    var largeImageURL: String = ""
-    var query = ""
 }

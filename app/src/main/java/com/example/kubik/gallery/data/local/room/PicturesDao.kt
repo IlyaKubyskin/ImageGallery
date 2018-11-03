@@ -11,7 +11,7 @@ interface PicturesDao {
     fun getAll(): List<SavedHit>
 
     @Insert
-    fun insertOne(hit: SavedHit)
+    fun insertOneHit(hit: SavedHit)
 
     @Query("DELETE FROM savedhit")
     fun deleteAll()

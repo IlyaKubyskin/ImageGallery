@@ -8,14 +8,12 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.example.kubik.gallery.data.local.room.SavedHit
-import com.example.kubik.gallery.data.model.Hit
 import com.example.kubik.gallery.ui.pictureslist.adapter.PicturesListAdapter
 import kotlinx.android.synthetic.main.li_picture_holder.view.*
 
 class PictureHolder(
     itemView: View,
-    private val callback: PicturesListAdapter.AdapterCallback
+    private val callback: PicturesListAdapter.OnItemClickCallback
 ) : RecyclerView.ViewHolder(itemView) {
 
     init {
@@ -23,16 +21,7 @@ class PictureHolder(
     }
 
     fun bind(hit: PicturesListAdapter.PictureItem) {
-        if (hit is Hit) {
-            loadImage(hit.previewURL)
-        } else {
-            hit as SavedHit
-            loadImage(hit.previewURL)
-        }
-    }
-
-    fun loadImage(url: String) {
-        Glide.with(itemView.context).load(url).addListener(object : RequestListener<Drawable> {
+        Glide.with(itemView.context).load(hit.getPreviewUrl()).addListener(object : RequestListener<Drawable> {
             override fun onLoadFailed(
                 e: GlideException?,
                 model: Any?,

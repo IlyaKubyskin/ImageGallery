@@ -5,7 +5,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object PicturesProvider {
+object RetrofitServiceProvider {
     @JvmStatic
     private val retrofit: Retrofit by lazy {
         getRetrofitInstance()

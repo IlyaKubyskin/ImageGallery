@@ -5,7 +5,9 @@ import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.kubik.gallery.R
@@ -18,6 +20,7 @@ import kotlinx.android.synthetic.main.fr_pager_large_image.*
 class LargeImagePager : BaseFragment(), LargeImageView{
 
     private var picturesList = mutableListOf<SavedHit>()
+    private var page = 0
 
     @InjectPresenter
     lateinit var presenter: LargeImagePresenter
@@ -31,6 +34,8 @@ class LargeImagePager : BaseFragment(), LargeImageView{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        page = arguments?.getInt(PAGE) ?: 0
+
         presenter.getPictures()
 
         viewPager.adapter = object : FragmentStatePagerAdapter(fragmentManager) {
@@ -41,18 +46,12 @@ class LargeImagePager : BaseFragment(), LargeImageView{
 
             override fun getCount(): Int = picturesList.size
         }
-
-        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
-            override fun onPageSelected(position: Int) {
-                MainActivity.position = position
-            }
-        })
     }
 
     override fun setPictures(hits: List<SavedHit>) {
         picturesList.addAll(hits)
         viewPager.adapter?.notifyDataSetChanged()
-        viewPager.setCurrentItem(MainActivity.position, false)
+        viewPager.setCurrentItem(page, false)
     }
 
     @LayoutRes
@@ -60,7 +59,15 @@ class LargeImagePager : BaseFragment(), LargeImageView{
 
     companion object {
 
+        private const val PAGE = "page"
+
         @JvmStatic
-        fun newInstance() = LargeImagePager()
+        fun newInstance(position: Int): LargeImagePager {
+            val fragment = LargeImagePager()
+            fragment.arguments = Bundle().apply {
+                putInt(PAGE, position)
+            }
+            return fragment
+        }
     }
 }

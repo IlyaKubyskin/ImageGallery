@@ -9,7 +9,14 @@ class PicturesListPresenter(private val repository: Repository) : BasePresenter<
 
     var query = "yellow+flowers"
 
-    override fun onFirstViewAttach() = getPictures()
+    override fun onFirstViewAttach() = startLoadingJob {
+        val cache = repository.getAllDataFromDb()
+        if (cache != null && cache.isNotEmpty()) {
+            viewState.setPictures(cache, true)
+        } else {
+            loadRemote(query)
+        }
+    }
 
     fun search(query: String?) {
         if (query != null) {
@@ -19,23 +26,13 @@ class PicturesListPresenter(private val repository: Repository) : BasePresenter<
     }
 
     private fun getPictures() = startLoadingJob {
-        val cache = repository.getAllDataFromDb()
-        if (cache != null && cache.isNotEmpty()) {
-            val lastQuery = cache[0].query
-            if (query == lastQuery) {
-                viewState.setPictures(cache, true)
-            } else {
-                loadRemote(query)
-            }
-        } else {
-            loadRemote(query)
-        }
+       loadRemote(query)
     }
 
     private suspend fun loadRemote(query: String) {
         val result = repository.getPictures(query)
         viewState.setPictures(result.hits, true)
         repository.deleteAllDataFromDb()
-        repository.insertIntoDb(result, query)
+        repository.insertHitsIntoDb(result)
     }
 }

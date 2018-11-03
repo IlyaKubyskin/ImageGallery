@@ -16,7 +16,7 @@ import com.example.kubik.gallery.ui.pictureslist.adapter.PicturesListAdapter
 import kotlinx.android.synthetic.main.fr_bot_toolbar.*
 import kotlinx.android.synthetic.main.fr_recycler.*
 
-class PicturesListFragment : BaseFragment(), PicturesListView, PicturesListAdapter.AdapterCallback {
+class PicturesListFragment : BaseFragment(), PicturesListView, PicturesListAdapter.OnItemClickCallback {
 
     @InjectPresenter
     lateinit var presenter: PicturesListPresenter
@@ -57,15 +57,14 @@ class PicturesListFragment : BaseFragment(), PicturesListView, PicturesListAdapt
     override fun setPictures(hits: List<PicturesListAdapter.PictureItem>, clear: Boolean) = adapter.setData(hits, true)
 
     override fun onImageClick(itemView: View, adapterPosition: Int) {
-        MainActivity.position = adapterPosition
-
-        fragmentManager?.beginTransaction()
-            ?.replace(R.id.container, getNextFragment())
-            ?.addToBackStack(null)
-            ?.commit()
+        val fm = fragmentManager
+        if (fm != null) {
+            fm.beginTransaction()
+                .replace(R.id.container, LargeImagePager.newInstance(adapterPosition))
+                .addToBackStack(null)
+                .commit()
+        }
     }
-
-    private fun getNextFragment() = LargeImagePager.newInstance()
 
     companion object {
 
