@@ -9,7 +9,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.kubik.gallery.R
 import com.example.kubik.gallery.data.Repository
-import com.example.kubik.gallery.ui.MainActivity
 import com.example.kubik.gallery.ui.base.BaseFragment
 import com.example.kubik.gallery.ui.largeimage.LargeImagePager
 import com.example.kubik.gallery.ui.pictureslist.adapter.PicturesListAdapter
